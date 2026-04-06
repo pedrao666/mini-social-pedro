@@ -16,7 +16,7 @@ function curtir() {
 function descurtir() {
   if(descurtido == false){
     likeCount--;
-    descurtido = true;
+    descurtido  = true;
     document.getElementById("deslikeCount").innerText = likeCount;
   } else{
     likeCount--;
