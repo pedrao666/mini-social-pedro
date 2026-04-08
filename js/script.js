@@ -1,32 +1,49 @@
 let likeCount = 0;
-let curtido = false; // flag booleana
+let dislikeCount = 0;
+
+let curtido = false;
+let descurtido = false;
 
 function curtir() {
-  if(curtido == false){
-    likeCount++;
-    curtido = true;
-    document.getElementById("likeCount").innerText = likeCount;
-  } else{
-    likeCount--;
-    curtido = false
-    document.getElementById("deslikeCount").innerText = likeCount;
-  }
-  
-}
-function descurtir() {
-  if(descurtido == false){
-    likeCount--;
-    descurtido  = true;
-    document.getElementById("deslikeCount").innerText = likeCount;
-  } else{
-    likeCount--;
-    descurtido = false
-    document.getElementById("deslikeCount").innerText = likeCount;
-  }
-  
-}
-document.getElementById("likeBtn").addEventListener("click", curtir);
+  if (!curtido) {
+      likeCount++;
+          curtido = true;
 
-document.getElementById("dselikeBtn").addEventListener("click", descurtir);
+              // se tinha dislike, remove
+                  if (descurtido) {
+                        dislikeCount--;
+                              descurtido = false;
+                                  }
+                                    } else {
+                                        likeCount--;
+                                            curtido = false;
+                                              }
 
-let count = document.getElementById("likeCount");
+                                                atualizarTela();
+                                                }
+
+                                                function descurtir() {
+                                                  if (!descurtido) {
+                                                      dislikeCount++;
+                                                          descurtido = true;
+
+                                                              // se tinha like, remove
+                                                                  if (curtido) {
+                                                                        likeCount--;
+                                                                              curtido = false;
+                                                                                  }
+                                                                                    } else {
+                                                                                        dislikeCount--;
+                                                                                            descurtido = false;
+                                                                                              }
+
+                                                                                                atualizarTela();
+                                                                                                }
+
+                                                                                                function atualizarTela() {
+                                                                                                  document.getElementById("likeCount").innerText = likeCount;
+                                                                                                    document.getElementById("deslikeCount").innerText = dislikeCount;
+                                                                                                    }
+
+                                                                                                    document.getElementById("likeBtn").addEventListener("click", curtir);
+                                                                                                    document.getElementById("deslikeBtn").addEventListener("click", descurtir);
