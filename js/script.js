@@ -1,8 +1,12 @@
+//===ESTADDO (dados da aplicaçao) ===
+
 let likeCount = 0;
 let dislikeCount = 0;
 
 let curtido = false;
 let descurtido = false;
+
+//=== SERVICE(regras de negocio) ===
 
 function curtir() {
   if (!curtido) {
@@ -27,9 +31,9 @@ function curtir() {
                                                       dislikeCount++;
                                                           descurtido = true;
 
-                                                              // se tinha like, remove
-                                                                  if (curtido) {
-                                                                        likeCount--;
+                          // se tinha like, remove
+                                     if (curtido) {
+                                 likeCount--;
                                                                               curtido = false;
                                                                                   }
                                                                                     } else {
@@ -44,6 +48,16 @@ function curtir() {
                                                                                                   document.getElementById("likeCount").innerText = likeCount;
                                                                                                     document.getElementById("deslikeCount").innerText = dislikeCount;
                                                                                                     }
+//=== CONTROLER (intermediaçao)===
 
-                                                                                                    document.getElementById("likeBtn").addEventListener("click", curtir);
-                                                                                                    document.getElementById("deslikeBtn").addEventListener("click", descurtir);
+function clicarCurtir(){
+  curtir();
+}
+function clicarDescurtir(){
+  descurtir();
+}
+
+                                                              // === EVENTOS ===
+
+                                                                                                    document.getElementById("likeBtn").addEventListener("click", clicarCurtir);
+                                                                                                    document.getElementById("deslikeBtn").addEventListener("click", clicarDescurtir);
