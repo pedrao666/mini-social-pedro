@@ -1,67 +1,86 @@
-//===ESTADDO (dados da aplicaçao) ===
+//=== BANCO DE DADOS (JSON Simulado) === 
 
-let likeCount = 0;
-let dislikeCount = 0;
+let post = {
+  likeCount: 0,
+  dislikeCount: 0,
+  curtido: false,
+  descurtido: false
+}
 
-let curtido = false;
-let descurtido = false;
-
-//=== SERVICE(regras de negocio) ===
+//=== SERVICE (regras de negócio) === 
 
 function curtir() {
-  if (!curtido) {
-      likeCount++;
-          curtido = true;
+  if (post.curtido == false){
+    post.likeCount++;
+    post.curtido = true;
 
-              // se tinha dislike, remove
-                  if (descurtido) {
-                        dislikeCount--;
-                              descurtido = false;
-                                  }
-                                    } else {
-                                        likeCount--;
-                                            curtido = false;
-                                              }
+    if(post.descurtido == true){
+      post.dislikeCount--;
+      post.descurtido = false;
+    }
 
-                                                atualizarTela();
-                                                }
+  }else{
+    post.likeCount--;
+    post.curtido = false;
+  }
 
-                                                function descurtir() {
-                                                  if (!descurtido) {
-                                                      dislikeCount++;
-                                                          descurtido = true;
+}
 
-                          // se tinha like, remove
-                                     if (curtido) {
-                                 likeCount--;
-                                                                              curtido = false;
-                                                                                  }
-                                                                                    } else {
-                                                                                        dislikeCount--;
-                                                                                            descurtido = false;
-                                                                                              }
+function descurtir() {
+  if(post.descurtido == false){
+    post.dislikeCount++;
+    post.descurtido = true;
 
-                                                                                                atualizarTela();
-                                                                                                }
+    if(post.curtido == true){
+      post.likeCount--;
+      post.curtido = false;
+    }
 
-                                                                                                function atualizarTela() {
-                                                                                                  document.getElementById("likeCount").innerText = likeCount;
-                                                                                                    document.getElementById("deslikeCount").innerText = dislikeCount;
-                                                                                                    }
-//=== CONTROLER (intermediaçao)===
+  }
+  else{
+    post.dislikeCount--;
+    post.descurtido = false;
+  }
+}
+
+//=== API SIMULADA === 
+
+function getPost(){
+  return post;
+}
+
+function likePost(){
+  curtir();
+  return post;
+}
+
+function dislikePost(){
+  descurtir();
+  return post;
+}
+
+// === VIEW (interface/renderização)===
+function atualizarTela(){
+  document.getElementById("likeCount").innerText = likeCount;
+  document.getElementById("dislikeCount").innerText = dislikeCount;
+}
+
+//=== CONTROLLER (intermediação)===
 
 function clicarCurtir(){
   curtir();
+  atualizarTela();
 }
 function clicarDescurtir(){
   descurtir();
+  atualizarTela();
 }
 
-                                                              // === EVENTOS ===
+// === EVENTOS ===
 
-                                                                                                    document.getElementById("likeBtn").addEventListener("click", clicarCurtir);
-                                                                                                    document.getElementById("deslikeBtn").addEventListener("click", clicarDescurtir);
-                                                                                                    
-                                                                                                    //--- INICIALIZAÇAO ---
+document.getElementById("likeBtn").addEventListener("click", clicarCurtir);
+document.getElementById("dislikeBtn").addEventListener("click", clicarDescurtir);
 
-                                                                                                    atualizarTela
+// === INICIALIZAÇÃO ===  
+
+atualizarTela();
