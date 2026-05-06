@@ -61,3 +61,7 @@ function clicarDescurtir(){
 
                                                                                                     document.getElementById("likeBtn").addEventListener("click", clicarCurtir);
                                                                                                     document.getElementById("deslikeBtn").addEventListener("click", clicarDescurtir);
+                                                                                                    
+                                                                                                    //--- INICIALIZAÇAO ---
+
+                                                                                                    atualizarTela
